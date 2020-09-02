@@ -1,0 +1,78 @@
+﻿@*@{
+        ViewData["Title"] = "Home Page";
+    }
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "Movies Catalogue";
+    // Layout = null;
+}
+@*<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Movies Catalogue</title>
+</head>
+<body>*@
+    <h3>Movies</h3>
+<br /><br />
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    @Html.TextBox("searching")<input type="submit" value="Search" />
+}
+    <table class="table-condensed">
+        <thead>
+            <tr>
+                <td><b>Name</b></td>
+                <td><b>Year, when issued</b></td>
+                @*<td>Synopsis</td>*@
+                <td><b>Release Date</b></td>
+                <td><b>Runtime, minutes</b></td>
+                <td><b>Genre</b></td>
+                <td><b>IMDbRating</b></td>
+                <td><b>IMDbVotes</b></td>
+                @*<td>IMDbLink</td>*@
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="7" style="color:red">
+                        No Match Any Document
+                        <p>
+                            @*<a asp-action="Create">Create New</a>*@
+                            @*@Html.ActionLink("Advanced Search", "Index", "Movies")*@
+                            @*<a href="https://localhost:44318/index/blade">Advanced Search</a>*@
+                        </p>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var movie in Model)
+                {
+                    <tr>
+                        <td>@movie.Name</td>
+                        <td>@movie.Year</td>
+                        @*<td>@movie.Synopsis</td>*@
+                        <td>@movie.ReleaseDate</td>
+                        <td>@movie.Runtime</td>
+                        <td>@movie.Genre</td>
+                        <td>@movie.IMDbRating</td>
+                        <td>@movie.IMDbVotes</td>
+                        @*<td>@movie.IMDbLink</td>*@
+                        <td><p>@Html.ActionLink("Details", "Details", new { id = movie.Id })</p></td>
+                    </tr>
+                }
+            }
+        </tbody>
+        
+    </table>
+@*</body>
+</html>*@
